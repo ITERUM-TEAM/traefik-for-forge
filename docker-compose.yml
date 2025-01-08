@@ -2,8 +2,8 @@ services:
   traefik:
     image: traefik:v3
     restart: always
-    # stdin_open: true
-    # tty: true
+    stdin_open: true
+    tty: true
     networks:
       - web
     ports:
@@ -16,7 +16,7 @@ services:
     environment:
       - CLOUDFLARE_DNS_API_TOKEN=${CLOUDFLARE_DNS_API_TOKEN}
     command:
-      # - --log.level=DEBUG
+      - --log.level=DEBUG
       - --api.dashboard=true
       - --entrypoints.http.address=:80
       - --entrypoints.https.address=:443

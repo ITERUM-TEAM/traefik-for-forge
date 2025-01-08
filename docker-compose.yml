@@ -20,7 +20,6 @@ services:
       - --api.dashboard=true
       - --entrypoints.http.address=:80
       - --entrypoints.https.address=:443
-      - --entrypoints.wss.address=:6001
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
       - --certificatesresolvers.leresolver.acme.email=${LETS_ENCRYPT_EMAIL}

@@ -9,6 +9,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "4000:4000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./letsencrypt:/letsencrypt
@@ -20,6 +21,7 @@ services:
       - --api.dashboard=true
       - --entrypoints.http.address=:80
       - --entrypoints.https.address=:443
+      - --entrypoints.ws4000.address=:4000
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
       - --certificatesresolvers.leresolver.acme.email=${LETS_ENCRYPT_EMAIL}

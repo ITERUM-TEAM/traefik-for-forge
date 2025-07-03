@@ -1,0 +1,28 @@
+entryPoints:
+  http:
+    address: ":80"
+  https:
+    address: ":443"
+  ws4000:
+    address: ":4000"
+    http:
+      protocols:
+        - "HTTP/1.1"
+
+providers:
+  docker:
+    exposedByDefault: false
+
+certificatesResolvers:
+  leresolver:
+    acme:
+      email: ${LETS_ENCRYPT_EMAIL}
+      storage: /letsencrypt/acme.json
+      dnsChallenge:
+        provider: cloudflare
+
+api:
+  dashboard: true
+
+log:
+  level: INFO  # Or DEBUG if troubleshooting

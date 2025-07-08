@@ -6,6 +6,9 @@ Step 2. Configure ENV variables, and set Traefik Dashboard password
 !!! Recommended doing via SSH, even you could fdo it from Forge's UI "Run command"
 ```
 ./Taskfile copyEnv
+edit .env
+```
+```
+touch traefik.auth
 ./Taskfile auth username password
-
 ```

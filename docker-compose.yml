@@ -17,6 +17,7 @@ services:
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
     environment:
       - CLOUDFLARE_DNS_API_TOKEN=${CLOUDFLARE_DNS_API_TOKEN}
+      - LETS_ENCRYPT_EMAIL=${LETS_ENCRYPT_EMAIL}
     labels:
       ## TRAEFIK ROUTER & DASHBOARD
       - traefik.enable=true

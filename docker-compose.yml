@@ -16,7 +16,6 @@ services:
       - ./traefik.auth:/auth/traefik.auth
     environment:
       - CLOUDFLARE_DNS_API_TOKEN=${CLOUDFLARE_DNS_API_TOKEN}
-      - LETS_ENCRYPT_EMAIL=${LETS_ENCRYPT_EMAIL}
     command:
       - --log.level=INFO
       - --api.dashboard=true
@@ -29,6 +28,7 @@ services:
       - --certificatesResolvers.leresolver.acme.storage=/letsencrypt/acme.json
       - --certificatesResolvers.leresolver.acme.dnsChallenge=true
       - --certificatesResolvers.leresolver.acme.dnsChallenge.provider=cloudflare
+      - --certificatesResolvers.leresolver.acme.dnsChallenge.resolvers=1.1.1.1:53,8.8.8.8:53
     labels:
       ## TRAEFIK ROUTER & DASHBOARD
       - traefik.enable=true

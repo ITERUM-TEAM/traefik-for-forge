@@ -13,7 +13,7 @@ providers:
 certificatesResolvers:
   leresolver:
     acme:
-      email: ${LETS_ENCRYPT_EMAIL}
+      email: it@iterum.lv
       storage: /letsencrypt/acme.json
       dnsChallenge:
         provider: cloudflare

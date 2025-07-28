@@ -14,14 +14,25 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./letsencrypt:/letsencrypt
       - ./traefik.auth:/auth/traefik.auth
-      - ./traefik.yml:/etc/traefik/traefik.yml:ro
     environment:
       - CLOUDFLARE_DNS_API_TOKEN=${CLOUDFLARE_DNS_API_TOKEN}
       - LETS_ENCRYPT_EMAIL=${LETS_ENCRYPT_EMAIL}
+    command:
+      - --log.level=INFO
+      - --api.dashboard=true
+      - --entryPoints.http.address=:80
+      - --entryPoints.https.address=:443
+      - --entryPoints.ws4000.address=:4000
+      - --providers.docker=true
+      - --providers.docker.exposedByDefault=false
+      - --certificatesResolvers.leresolver.acme.email=${LETS_ENCRYPT_EMAIL}
+      - --certificatesResolvers.leresolver.acme.storage=/letsencrypt/acme.json
+      - --certificatesResolvers.leresolver.acme.dnsChallenge=true
+      - --certificatesResolvers.leresolver.acme.dnsChallenge.provider=cloudflare
     labels:
       ## TRAEFIK ROUTER & DASHBOARD
       - traefik.enable=true
-      - traefik.http.routers.traefik.entrypoints=https
+      - traefik.http.routers.traefik.entryPoints=https
       - traefik.http.routers.traefik.rule=Host(`${TRAEFIK_DASHBOARD_HOST}`)
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.middlewares=auth

@@ -5,7 +5,10 @@ services:
     # stdin_open: true
     # tty: true
     networks:
-      - web
+      web:
+        aliases:
+          - ${PET_API_HOST}
+          - ${D365_API_HOST}
     ports:
       - "80:80"
       - "443:443"
